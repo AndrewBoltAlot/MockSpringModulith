@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns:th="http://www.thymeleaf.org">
+<head>
+    <title>Boat List</title>
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+</head>
+<body>
+<h2>Boat List</h2>
+<table>
+    <thead>
+    <tr>
+        <th>Name</th>
+        <th>Type</th>
+        <th>Cost</th>
+        <th>Owner</th>
+        <th>Actions</th>
+    </tr>
+    </thead>
+    <tbody>
+    <tr th:each="boat : ${boats}">
+        <td th:text="${boat.name}"></td>
+        <td th:text="${boat.type}"></td>
+        <td th:text="${boat.cost}"></td>
+        <td th:text="${boat.owner.name}"></td>
+        <td>
+            <form th:action="@{/boat_registration/delete/{id}(id=${boat.id})}" method="post">
+                <input type="hidden" name="_method" value="delete" />
+                <button type="submit">Delete</button>
+            </form>
+        </td>
+    </tr>
+    </tbody>
+</table>
+
+<!-- Button to go back to boat registration -->
+<a href="/boat_registration/register" class="back-button">Register New Boat</a>
+
+<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+<script th:src="@{/js/main.js}"></script>
+</body>
+</html>
