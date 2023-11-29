@@ -15,16 +15,17 @@ public class SecurityConfig {
     public SecurityFilterChain securityFilterChain(HttpSecurity http) throws Exception {
         http
                 .authorizeHttpRequests(authz -> authz
-                        .requestMatchers("/public/**", "/user_registration/**").permitAll() // Allow access to both /public/ and /user_registration/
+                        .requestMatchers("/public/**", "/user_registration/**", "/h2-console/**").permitAll()
                         .anyRequest().authenticated())
-                .formLogin(form -> form
-                        .loginPage("/auth/login")
-                        .permitAll()
-                        .defaultSuccessUrl("/user_registration", true) // Redirect to user registration page
+                .formLogin(formLogin -> formLogin
+                        .loginPage("/auth/login").permitAll()
+                        .defaultSuccessUrl("/home", true)
                         .failureUrl("/auth/login?error=true"))
-                .logout(logout -> logout
-                        .logoutSuccessUrl("/public"))
-                .httpBasic(httpBasic -> httpBasic.disable());
+                .logout(logout -> logout.logoutSuccessUrl("/public"))
+                .httpBasic(httpBasic -> httpBasic.disable())
+                .csrf(csrf -> csrf.ignoringRequestMatchers("/h2-console/**"))
+                .headers(headers -> headers.frameOptions().sameOrigin()); // Allow use of frame to same origin URLs
+
         return http.build();
     }
 
@@ -33,3 +34,4 @@ public class SecurityConfig {
         return new BCryptPasswordEncoder();
     }
 }
+

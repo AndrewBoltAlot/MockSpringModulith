@@ -24,15 +24,16 @@ public class UserService {
     }
 
     public UserRegistration registerUser(UserDTO userDTO) {
-        UserRegistration user = new UserRegistration();
-        user.setName(userDTO.getName());
-        user.setEmail(userDTO.getEmail());
-        user.setAddress(userDTO.getAddress());
-        user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Encrypting the password
+        UserRegistration newUser = new UserRegistration();
+        newUser.setName(userDTO.getName());
+        newUser.setEmail(userDTO.getEmail());
+        newUser.setAddress(userDTO.getAddress());
+        newUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
 
-        log.info("Registering new user: {}", user);
-        return userRepository.save(user);
+        log.info("Registering new user: {}", newUser.getEmail());
+        return userRepository.save(newUser);
     }
+
 
     public Optional<UserRegistration> findByEmail(String email) {
         return userRepository.findByEmail(email);
