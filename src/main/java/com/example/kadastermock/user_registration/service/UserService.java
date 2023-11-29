@@ -1,9 +1,11 @@
 package com.example.kadastermock.user_registration.service;
 
+import com.example.kadastermock.user_registration.dto.UserDTO;
 import com.example.kadastermock.user_registration.model.UserRegistration;
 import com.example.kadastermock.user_registration.repository.UserRepository;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -13,22 +15,30 @@ import java.util.Optional;
 @Slf4j
 public class UserService {
     private final UserRepository userRepository;
+    private final PasswordEncoder passwordEncoder;
 
     @Autowired
-    public UserService(UserRepository userRepository){
+    public UserService(UserRepository userRepository, PasswordEncoder passwordEncoder) {
         this.userRepository = userRepository;
+        this.passwordEncoder = passwordEncoder;
     }
 
-    public UserRegistration registerUser(UserRegistration userRegistration){
-        log.info("Registring new user: {}", userRegistration);
-        return userRepository.save(userRegistration);
+    public UserRegistration registerUser(UserDTO userDTO) {
+        UserRegistration user = new UserRegistration();
+        user.setName(userDTO.getName());
+        user.setEmail(userDTO.getEmail());
+        user.setAddress(userDTO.getAddress());
+        user.setPassword(passwordEncoder.encode(userDTO.getPassword())); // Encrypting the password
+
+        log.info("Registering new user: {}", user);
+        return userRepository.save(user);
     }
 
-    public Optional<UserRegistration> findByEmail(String email){
+    public Optional<UserRegistration> findByEmail(String email) {
         return userRepository.findByEmail(email);
     }
 
-    public void deleteUser(Long userId){
+    public void deleteUser(Long userId) {
         userRepository.deleteById(userId);
     }
 
