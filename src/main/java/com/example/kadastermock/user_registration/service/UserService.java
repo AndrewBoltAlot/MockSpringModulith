@@ -25,7 +25,7 @@ public class UserService {
 
     public UserRegistration registerUser(UserDTO userDTO) {
         UserRegistration newUser = new UserRegistration();
-        newUser.setName(userDTO.getName());
+        newUser.setUsername(userDTO.getName());
         newUser.setEmail(userDTO.getEmail());
         newUser.setAddress(userDTO.getAddress());
         newUser.setPassword(passwordEncoder.encode(userDTO.getPassword()));
@@ -33,10 +33,8 @@ public class UserService {
         log.info("Registering new user: {}", newUser.getEmail());
         return userRepository.save(newUser);
     }
-
-
-    public Optional<UserRegistration> findByEmail(String email) {
-        return userRepository.findByEmail(email);
+    public UserRegistration authenticate(String username, String password) {
+        return userRepository.findByUsernameAndPassword(username, password).orElse(null);
     }
 
     public void deleteUser(Long userId) {

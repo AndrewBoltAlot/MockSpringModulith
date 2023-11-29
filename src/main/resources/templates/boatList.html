@@ -21,7 +21,7 @@
         <td th:text="${boat.name}"></td>
         <td th:text="${boat.type}"></td>
         <td th:text="${boat.cost}"></td>
-        <td th:text="${boat.owner.name}"></td>
+        <td th:text="${boat.owner.getUsername}"></td>
         <td>
             <form th:action="@{/boat_registration/delete/{id}(id=${boat.id})}" method="post">
                 <input type="hidden" name="_method" value="delete" />

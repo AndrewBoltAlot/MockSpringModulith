@@ -7,9 +7,9 @@
 </head>
 <body>
 <h2>Login</h2>
-<form th:action="@{/auth/login}" th:object="${loginDTO}" method="post">
-    <label for="email">Email:</label>
-    <input type="email" id="email" th:field="*{email}" />
+<form th:action="@{/auth/login}" th:object="${loginRequest}" method="post">
+    <label for="username">Username:</label>
+    <input type="text" id="username" th:field="*{username}" />
 
     <label for="password">Password:</label>
     <input type="password" id="password" th:field="*{password}" />
