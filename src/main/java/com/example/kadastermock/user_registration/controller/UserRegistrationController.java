@@ -1,5 +1,6 @@
 package com.example.kadastermock.user_registration.controller;
 
+import com.example.kadastermock.authentication.controller.AuthenticationController;
 import com.example.kadastermock.user_registration.dto.UserDTO;
 import com.example.kadastermock.user_registration.model.UserRegistration;
 import com.example.kadastermock.user_registration.service.UserService;
