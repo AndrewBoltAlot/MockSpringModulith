@@ -9,7 +9,7 @@
 <table>
     <thead>
     <tr>
-        <th>Name</th>
+        <th>Username</th>
         <th>Email</th>
         <th>Address</th>
         <th>Actions</th>
@@ -17,11 +17,11 @@
     </thead>
     <tbody>
     <tr th:each="user : ${users}">
-        <td th:text="${user.name}"></td>
+        <td th:text="${user.username}"></td> <!-- Change from user.name to user.username -->
         <td th:text="${user.email}"></td>
         <td th:text="${user.address}"></td>
         <td>
-            <form th:action="@{/user_registration/{id}(id=${user.id})}" method="post">
+            <form th:action="@{/user_registration/users/delete/{id}(id=${user.id})}" method="post">
                 <input type="hidden" name="_method" value="delete" />
                 <button type="submit">Delete</button>
             </form>
@@ -29,8 +29,6 @@
     </tr>
     </tbody>
 </table>
-
-<script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
 <script th:src="@{/js/main.js}"></script>
 </body>
 </html>
