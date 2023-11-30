@@ -3,11 +3,17 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Login</title>
-    <!-- Add your CSS links here -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
 </head>
 <body>
+
+
 <h2>Login</h2>
 <form th:action="@{/auth/login}" th:object="${loginRequest}" method="post">
+
+    <div class="container">
+
+
     <label for="username">Username:</label>
     <input type="text" id="username" th:field="*{username}" />
 
@@ -15,11 +21,19 @@
     <input type="password" id="password" th:field="*{password}" />
 
     <button type="submit">Login</button>
+
+
+    </div>
 </form>
+
+<div class="container" style="background-color:transparent">
+
 <a href="/auth/logout">Logout</a>
 <a href="/user_registration">Create Account</a>
 <div th:if="${param.error}">
     Invalid credentials.
+</div>
+
 </div>
 </body>
 </html>

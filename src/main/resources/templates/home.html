@@ -3,14 +3,18 @@
 <html xmlns:th="http://www.thymeleaf.org">
 <head>
     <title>Home</title>
-    <!-- Add your CSS links here -->
+    <link rel="stylesheet" th:href="@{/css/style.css}" />
+
 </head>
 <body>
+
 <h2>Welcome</h2>
 <p>Welcome to our application!</p>
 
-<!-- Button to navigate to Boat Registration page -->
+<div class="button-container">
 <a th:href="@{/boat_registration/register}" class="button">Register Boat</a>
 <a th:href="@{/users}" class="button">User Table</a>
+</div>
+
 </body>
 </html>
