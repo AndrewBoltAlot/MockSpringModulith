@@ -46,7 +46,7 @@ public class AuthenticationController {
         UserRegistration loginUser = userService.authenticate(user.getUsername(), user.getPassword());
         if (loginUser != null) {
             model.addAttribute("userLogin", loginUser.getUsername());
-            return "mypage";
+            return "home";
         } else {
             return "error_page";
         }
