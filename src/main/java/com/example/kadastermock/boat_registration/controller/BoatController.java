@@ -53,9 +53,9 @@ public class BoatController {
         return "boatList";
     }
 
-    @GetMapping("/delete/{boatId}")
-    public String deleteBoat(@PathVariable Long boatId) {
-        boatService.deleteBoat(boatId);
+    @GetMapping("/delete/{id}")
+    public String deleteBoat(@PathVariable Long id) {
+        boatService.deleteBoat(id);
         return "redirect:/boats";
     }
 }
